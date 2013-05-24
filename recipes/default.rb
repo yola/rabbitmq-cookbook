@@ -26,17 +26,21 @@ when 'debian'
   # installs the required setsid command -- should be there by default but just in case
   package 'util-linux'
 
-  if node['rabbitmq']['use_distro_version']
+  if node['rabbitmq']['use_upstream_repository']
 
-      apt_repository "rabbitmq" do
-          uri "http://www.rabbitmq.com/debian/"
-          distribution "testing"
-          components ["main"]
-          key "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
-          action :add
-      end
+    apt_repository "rabbitmq" do
+      uri "http://www.rabbitmq.com/debian/"
+      distribution "testing"
+      components ["main"]
+      key "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
+      action :add
+    end
 
-      package 'rabbitmq-server'
+    package 'rabbitmq-server'
+
+  elsif node['rabbitmq']['use_distro_version']
+
+    package 'rabbitmq-server'
 
   else
 
