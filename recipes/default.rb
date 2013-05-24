@@ -28,7 +28,15 @@ when 'debian'
 
   if node['rabbitmq']['use_distro_version']
 
-    package 'rabbitmq-server'
+      apt_repository "rabbitmq" do
+          uri "http://www.rabbitmq.com/debian/"
+          distribution "testing"
+          components ["main"]
+          key "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
+          action :add
+      end
+
+      package 'rabbitmq-server'
 
   else
 
