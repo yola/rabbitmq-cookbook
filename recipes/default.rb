@@ -32,7 +32,8 @@ when 'debian'
       uri "http://www.rabbitmq.com/debian/"
       distribution "testing"
       components ["main"]
-      key "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
+      keyserver "pool.sks-keyservers.net"
+      key "F78372A06FF50C80464FC1B4F7B8CEA6056E8E56"
       action :add
     end
 
